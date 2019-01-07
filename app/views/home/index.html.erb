@@ -1,0 +1,179 @@
+<section class="slice bg-dark bg-cover bg-size--contain" style="padding-bottom: 250px; background-image: url('/assets/backgrounds/DraftingSpec_Skyline.jpg'); background-position: center bottom;">
+  <div class="container pt-sm py-lg-lg">
+    <div class="row row-grid align-items-center justify-content-center">
+      <div class="col-lg-6">
+        <div class="pt-lg-md pb-lg-md text-center">
+          <h2 class="heading h1 text-white mb-3">Create Plan Review Reports</h2>
+          <p class="lead lh-180 text-white">Join fellow designers in creating construction drawing specification and review reports.</p>
+                <%= link_to new_user_registration_path, class: "btn btn-info btn-circle btn-translate--hover btn-icon mr-sm-4 scroll-me" do %>
+                    <span class="btn-inner--text">Create Account</span>
+                    <span class="btn-inner--icon"><i class="fas fa-angle-right"></i></span>
+                <% end %>            
+                <%= link_to root_path, class: "btn btn-outline-white btn-circle btn-translate--hover btn-icon d-none d-xl-inline-block scroll-me" do %>
+                    <span class="btn-inner--icon"><i class="fas fa-play"></i></span>
+                    <span class="btn-inner--text">View Report Features</span>
+                    <% end %>
+                </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="slice bg-dark overflow-hidden">
+  <div class="container position-relative zindex-100">
+    <div class="mb-md text-center">
+      <h3 class="text-white mt-4">Submit Permit Drawings With Confidence</h3>
+      <div class="fluid-paragraph text-center mt-4">
+        <p class="lead text-white lh-180">Our community section can help you with just about any problem.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card shadow border-0 mb-4">
+          <div class="card-body py-5">
+            <div class="d-flex align-items-start">
+              <div class="icon icon-shape icon-green rounded-circle">
+                <i class="fas fa-video"></i>
+              </div>
+              <div class="icon-text pl-4">
+                <h5 class="font-weight-bold">Create Spec/Review Reports</h5>
+              </div>
+            </div>
+            <p class="my-4">
+              Our reports are designed ensure your drawing sets are complete and compliant with the Ontario Building Code .
+            </p>
+            <%= link_to "Create Spec/Review Reports", root_path, class: "btn btn-sm btn-success btn-circle btn-block btn-translate--hover" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card shadow border-0 mb-4">
+          <div class="card-body py-5">
+            <div class="d-flex align-items-start">
+              <div class="icon icon-shape icon-orange rounded-circle">
+                <i class="fas fa-question"></i>
+              </div>
+              <div class="icon-text pl-4">
+                <h5 class="font-weight-bold">Ask questions when you need help</h5>
+              </div>
+            </div>
+            <p class="my-4">You have a community of Designers at your fingertips, you can get help with just about any problem you have.</p>
+            <%= link_to "See Recent Questions", answers_path, class: "btn btn-sm btn-warning btn-circle btn-block btn-translate--hover" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card shadow border-0 mb-4">
+          <div class="card-body py-5">
+            <div class="d-flex align-items-start">
+              <div class="icon icon-shape icon-teal rounded-circle">
+                <i class="fas fa-comments"></i>
+              </div>
+              <div class="icon-text pl-4">
+                <h5 class="font-weight-bold">Help others in the community</h5>
+              </div>
+            </div>
+            <p class="my-4">
+              The best way to learn is often to help others with their problems. Join the community to answer questions.
+            </p>
+            <%= link_to "See Unanswered Questions", answers_path, class: "btn btn-sm btn-info btn-circle btn-block btn-translate--hover" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slice slice-lg">
+  <div class="container">
+    <div class="row row-grid align-items-center justify-content-around">
+      <div class="col-lg-5">
+        <div class="pr-md-4">
+          <span class="badge badge-lg badge-primary opacity-8 text-uppercase ls-1 font-weight-600 mb-3">Detail guides</span>
+          <h3 class="heading h3">It's all in the Details</h3>
+          <p class="lead my-4">Watch as we draw building details together with everything explained. You can learn to draw your own, or purchase a download of the CAD file.</p>
+          <%= link_to root_path, class: "btn btn-primary btn-circle btn-icon mt-4" do %>
+            <span class="btn-inner--text">Check out the free screencasts</span>
+            <span class="btn-inner--icon"><i class="fas fa-angle-right"></i></span>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="position-relative" style="z-index: 10;">
+          <%= link_to root_path do %>
+            Image TODO
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slice slice-lg bg-dark mt-5">
+  <span class="tongue tongue-top"><i class="fas fa-angle-up"></i></span>
+  <div class="container">
+    <div class="mb-md text-center">
+      <h3 data-drip-attribute="headline" class="heading h3 text-white">Subscribe to the newsletter</h3>
+      <div class="fluid-paragraph text-center mt-4">
+        <p data-drip-attribute="description" class="lead lh-180 text-muted">Learn about new screencasts, articles, guides, updates, and more.</p>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <%= form_with url: newsletter_path, local: true do |form| %>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.text_field :fname, class: "form-control form-control-lg", placeholder: "First name" %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= form.text_field :lname, class: "form-control form-control-lg", placeholder: "Last name" %>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <%= form.text_field :email, class: "form-control form-control-lg", placeholder: "Email address" %>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <p class="text-center font-italic">By clicking this button, you agree to the Drafting Spec <%= link_to "Terms of Service", terms_path, class: "underline text-muted", target:"_blank" %> and <%= link_to "Privacy Policy", privacy_path, class: "underline text-muted", target: "_blank" %>.</p>
+                <button type="submit" class="btn btn-lg btn-block btn-primary btn-icon" value="Sign Up">
+                    <span class="btn-inner--icon"><i class="fas fa-paper-plane"></i></span>
+                    <span class="btn-inner--text">Subscribe</span>
+                </button>
+            </div>
+
+            <div class="mt-5 text-center font-weight-bold">More of a social being? We're also on <%= link_to "Twitter", "https://twitter.com/", class: "underline text-muted", target: "_blank" %> and <%= link_to "YouTube", "https://youtube.com/", class: "underline text-muted", target: "_blank" %>.<p></p>
+            
+            </div>
+        <% end %>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="slice slice-lg bg-secondary delimiter-bottom">
+  <span class="tongue tongue-top tongue-dark"><i class="fas fa-angle-up"></i></span>
+
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-6 text-center">
+        <h3 class="font-weight-400">I am ready to start creating spec and review reports with the <span class="font-weight-700">Drafting Spec</span> system.</h3>
+        <div class="mt-5">
+          <%= link_to new_user_registration_path, target: "_blank", class: "btn btn-info btn-circle btn-translate--hover btn-icon mr-sm-4 scroll-me" do %>
+            <span class="btn-inner--text">Create Account</span>
+            <span class="btn-inner--icon"><i class="fas fa-angle-right"></i></span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
