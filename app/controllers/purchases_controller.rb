@@ -2,14 +2,14 @@
 class PurchasesController < ApplicationController
     before_action :store_user_location!, if: :storable_location?
     before_action :authenticate_user!
-    before_action :set_course
+    before_action :set_project
 
     def new
     end
 
     def create
         # Amount in cents
-        @amount = @course.price
+        @amount = @project.price
 
         customer = Stripe::Customer.create(
             :email => current_user.email,
@@ -35,8 +35,8 @@ class PurchasesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_course
-        @course = Course.find(params[:course_id])
+    def set_project
+        @project = current_user.projects.find_by_id(params[:id])
     end
 
     def storable_location?

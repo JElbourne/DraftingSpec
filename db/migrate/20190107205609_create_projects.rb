@@ -5,7 +5,8 @@ class CreateProjects < ActiveRecord::Migration[5.2]
       t.string :address,    null: false
       t.string :filenumber, null: false
       t.references :user,   foreign_key: true
-
+      t.boolean :paid,      default: false
+      
       t.timestamps
     end
     add_index :projects, :filenumber

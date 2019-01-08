@@ -9,7 +9,9 @@ Rails.application.routes.draw do
       resources :services
 
       root to: "users#index"
-    end
+  end
+
+  resources :projects, only: [:index, :show, :new]
 
   get '/support', to: 'home#support'
   get '/terms', to: 'home#terms'

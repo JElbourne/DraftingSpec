@@ -77,10 +77,11 @@ ActiveRecord::Schema.define(version: 2019_01_07_211110) do
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string "name"
-    t.string "address"
-    t.string "filenumber"
+    t.string "name", null: false
+    t.string "address", null: false
+    t.string "filenumber", null: false
     t.bigint "user_id"
+    t.boolean "paid", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["filenumber"], name: "index_projects_on_filenumber"
