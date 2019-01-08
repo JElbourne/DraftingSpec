@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_02_205948) do
+ActiveRecord::Schema.define(version: 2019_01_07_211110) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,14 @@ ActiveRecord::Schema.define(version: 2019_01_02_205948) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "code_references", force: :cascade do |t|
+    t.string "number"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["number"], name: "index_code_references_on_number"
+  end
+
   create_table "friendly_id_slugs", id: :serial, force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -68,6 +76,17 @@ ActiveRecord::Schema.define(version: 2019_01_02_205948) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "filenumber"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["filenumber"], name: "index_projects_on_filenumber"
+    t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
   create_table "purchases", force: :cascade do |t|
     t.bigint "user_id"
     t.string "stripe_charge_id"
@@ -79,6 +98,38 @@ ActiveRecord::Schema.define(version: 2019_01_02_205948) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_purchases_on_user_id"
+  end
+
+  create_table "review_answers", force: :cascade do |t|
+    t.string "complete"
+    t.string "body"
+    t.string "sheet_number"
+    t.string "code_reference"
+    t.bigint "review_question_id"
+    t.bigint "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_review_answers_on_project_id"
+    t.index ["review_question_id"], name: "index_review_answers_on_review_question_id"
+  end
+
+  create_table "review_categories", force: :cascade do |t|
+    t.string "name"
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order"], name: "index_review_categories_on_order"
+  end
+
+  create_table "review_questions", force: :cascade do |t|
+    t.string "body"
+    t.string "code_reference"
+    t.integer "order"
+    t.bigint "review_category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order"], name: "index_review_questions_on_order"
+    t.index ["review_category_id"], name: "index_review_questions_on_review_category_id"
   end
 
   create_table "services", force: :cascade do |t|
@@ -128,7 +179,11 @@ ActiveRecord::Schema.define(version: 2019_01_02_205948) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "projects", "users"
   add_foreign_key "purchases", "users"
+  add_foreign_key "review_answers", "projects"
+  add_foreign_key "review_answers", "review_questions"
+  add_foreign_key "review_questions", "review_categories"
   add_foreign_key "services", "users"
   add_foreign_key "taggings", "tags"
 end
