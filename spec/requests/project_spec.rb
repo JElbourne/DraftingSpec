@@ -89,4 +89,64 @@ describe 'Project', type: :feature do
             expect(current_path).to eq project_path(6)
         end
     end
+
+    describe 'VISIT #EDIT' do
+
+        before(:each) do
+            @user = FactoryBot.create(:user)
+            @project = FactoryBot.create(:project, user: @user)
+        end
+        
+        it 'DOES NOT allow visitor to view EDIT project form' do
+            visit edit_project_path(@project)
+            expect(current_path).to eq user_session_path
+            expect(page).to have_selector('#message', text: 'You need to sign in or sign up before continuing.')
+        end
+
+        it 'DOES NOT allow Non-owner User to view EDIT project form' do
+            user = FactoryBot.create(:user, password: 'password')
+            login_as(user, scope: :user)
+
+            visit edit_project_path(@project)
+            expect(current_path).to eq projects_path
+            expect(page).to have_selector('#message', text: 'Project Not Found.')
+        end
+
+        it 'does allow Owner User to view EDIT project form' do
+            login_as(@user, scope: :user)
+            
+            visit edit_project_path(@project)
+            expect(current_path).to eq edit_project_path(@project)
+        end
+    end
+
+    describe 'VISIT #UPDATE' do
+        it 'allows Owner User to UPDATE course' do
+            user = FactoryBot.create(:user, password: 'password')
+            login_as(user, scope: :user)
+            existing_project = FactoryBot.create(:project, user: user)
+            
+            visit edit_project_path(existing_project)
+            fill_in 'project_name', with: 'Wow updated'
+            click_button 'Update Project'
+
+            latest_project = user.projects.last
+            expect(current_path).to eq project_path(latest_project)
+            expect(latest_project.name).to eq 'Wow updated'
+        end
+    end
+
+    describe 'VISIT #DESTROY' do
+        it 'allows Admin to DESTROY course' do
+            user = FactoryBot.create(:user, password: 'password')
+            login_as(user, scope: :user)
+            existing_project = FactoryBot.create(:project, user: user)
+            
+            visit edit_project_path(existing_project)
+            click_link 'Destroy'
+
+            expect(current_path).to eq projects_path
+            expect(Project.count).to eq 0
+        end
+    end
 end

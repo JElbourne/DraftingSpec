@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_project, only: [:show]
+    before_action :set_project, only: [:show, :edit, :update, :destroy]
 
     def index
         @projects = current_user.projects
@@ -11,6 +11,9 @@ class ProjectsController < ApplicationController
 
     def new
         @project = current_user.projects.new
+    end
+
+    def edit
     end
 
     def create
@@ -25,14 +28,37 @@ class ProjectsController < ApplicationController
             format.json { render json: @project.errors, status: :unprocessable_entity }
           end
         end
-      end
+    end
+
+    def update
+        respond_to do |format|
+          if @project.update(project_params)
+            format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+            format.json { render :show, status: :ok, location: @project }
+          else
+            format.html { render :edit }
+            format.json { render json: @project.errors, status: :unprocessable_entity }
+          end
+        end
+    end
+    
+    def destroy
+        @project.destroy
+        respond_to do |format|
+            format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+            format.json { head :no_content }
+        end
+    end
 
     private
 
         def set_project
             @project = current_user.projects.find_by_id(params[:id])
 
-            redirect_to projects_path() if @project.blank?
+            if @project.blank?
+                flash[:warning] = "Project Not Found."
+                redirect_to projects_path()
+            end
         end
 
         def project_params
